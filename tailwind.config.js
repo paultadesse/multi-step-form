@@ -19,6 +19,7 @@ export default {
       },
       backgroundImage: (theme) => ({
         stepper: "url('~/assets/images/bg-sidebar-desktop.svg')",
+        "mobile-stepper": "url('~/assets/images/bg-sidebar-mobile.svg')",
       }),
     },
   },

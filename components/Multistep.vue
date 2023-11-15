@@ -1,14 +1,15 @@
 <template lang="">
-  <div class="bg-white border rounded-xl shadow xl:flex py-4">
+  <div class="border rounded-xl shadow xl:flex xl:py-4">
     <!-- stepper -->
-    <div class="pl-4">
+    <div class="xl:pl-4">
       <div
-        class="bg-stepper bg-no-repeat rounded-xl p-8 bg-cover w-full xl:min-w-[274px] min-h-[568px]"
+        class="flex justify-center xl:justify-normal space-x-3 xl:space-x-0 xl:flex-col xl:bg-stepper bg-mobile-stepper xl:bg-no-repeat xl:rounded-xl p-8 xl:bg-cover w-full xl:min-w-[274px] xl:min-h-[568px]"
       >
         <div
           class="flex py-4 space-x-4 items-center"
           v-for="(step, index) in steps"
           :key="index"
+          v-show="index != steps.length - 1"
         >
           <div
             class="relative border rounded-full h-10 w-10 text-center"
@@ -22,7 +23,7 @@
               step.step_no
             }}</span>
           </div>
-          <div class="uppercase">
+          <div class="uppercase hidden xl:block">
             <p class="text-neutral-cool-gray tracking-wider font-light text-sm">
               step {{ step.step_no }}
             </p>
@@ -36,14 +37,16 @@
 
     <!-- n number of forms -->
     <div
-      class="xl:min-w-[600px] max-w-xl xl:px-20 px-4 py-8 flex flex-col justify-between"
+      class="xl:min-w-[600px] max-w-xl xl:px-20 xl:py-8 flex flex-col justify-between"
     >
-      <div class="min-h-full">
-        <component
-          :is="steps[active_step].component"
-          @next-step="++active_step"
-          @previous-step="--active_step"
-        ></component>
+      <div class="min-h-full bg-neutral-magnolia xl:bg-transparent">
+        <keep-alive>
+          <component
+            :is="steps[active_step].component"
+            @next-step="++active_step"
+            @previous-step="--active_step"
+          />
+        </keep-alive>
       </div>
     </div>
   </div>
@@ -88,11 +91,14 @@ var steps = [
       import("../components/forms/Summary.vue")
     ),
   },
+  {
+    step_no: 5,
+    step_valid: false,
+    step_skip: false,
+    title: "thank-you",
+    component: defineAsyncComponent(() =>
+      import("../components/forms/ThankYou.vue")
+    ),
+  },
 ];
-
-// var active_content = ref(steps[active_step.value]);
-
-// var activeStepClass = computed(() => ({
-//   "bg-green-500": active_content.value.title == steps[active_step.value].title,
-// }));
 </script>
