@@ -1,4 +1,4 @@
-# Nuxt 3 Minimal Starter
+# Multi-step form using Nuxt 3 | Vue 3 | TailwindCSS
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
